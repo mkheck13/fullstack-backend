@@ -1,0 +1,9 @@
+{
+    "cSpell.words": [
+        "backendserver",
+        "DTOS",
+        "Hmac"
+    ],
+    "appService.preDeployTask": "publish-release",
+    "appService.deploySubpath": "bin/Release/net8.0/publish"
+}
