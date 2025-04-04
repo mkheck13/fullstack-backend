@@ -26,7 +26,7 @@ namespace fullstack_backend.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login([FromBody] UserDTO user)
+        public async Task<IActionResult> Login([FromBody] UserLoginDTO user)
         {
             var success = await _userServices.Login(user);
 
@@ -35,14 +35,23 @@ namespace fullstack_backend.Controllers
             return Unauthorized(new {Message = "Username or Password is incorrect"}); 
         }
 
-        [HttpGet("GetUserInfoByUsername/{username}")]
-        public async Task<IActionResult> GetUserInfoByUsername(string username)
+        [HttpGet("GetUserInfoByEmailOrUsername/{emailOrUsername}")]
+        public async Task<IActionResult> GetUserInfoByEmailOrUsername(string emailOrUsername)
         {
-            var user = await _userServices.GetUserInfoByUserName(username);
+            var user = await _userServices.GetUserInfoByEmailOrUsername(emailOrUsername);
 
             if(user != null) return Ok(user);
 
             return BadRequest(new {Message = " User not found"});
+        }
+
+        [HttpPut("UpdateUserInfo/{userId}")]
+        public async Task<IActionResult> UpdateUserInfo(int userId, [FromBody] UpdateUserDTO updatedUser)
+        {
+            bool success = await _userServices.UpdateUserInfo(userId, updatedUser);
+            if (success) return Ok(new {Success = true, Message = "User updated successfully"});
+
+            return BadRequest(new {Success = false, Message = "User not found or update failed"});
         }
     }
 }

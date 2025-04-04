@@ -135,3 +135,4 @@ C:\Users\mkhec\Documents\CodeStack 24-25\FullStack\fullstack-backend\obj\Debug\n
 C:\Users\mkhec\Documents\CodeStack 24-25\FullStack\fullstack-backend\obj\Debug\net8.0\fullstack-backend.pdb
 C:\Users\mkhec\Documents\CodeStack 24-25\FullStack\fullstack-backend\obj\Debug\net8.0\fullstack-backend.genruntimeconfig.cache
 C:\Users\mkhec\Documents\CodeStack 24-25\FullStack\fullstack-backend\obj\Debug\net8.0\ref\fullstack-backend.dll
+C:\Users\mkhec\Documents\CodeStack 24-25\FullStack\fullstack-backend\obj\Debug\net8.0\fullstack-backend.sourcelink.json
