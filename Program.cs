@@ -25,7 +25,7 @@ builder.Services.AddCors(options => {
 });
 
 var secretKey = builder.Configuration["JWT:key"];
-var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
 
 builder.Services.AddAuthentication(options => {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

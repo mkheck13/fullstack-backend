@@ -142,7 +142,7 @@ namespace fullstack_backend.Services
 
         public async Task<UserModel> GetUserByEmailOrUsername(string emailOrUsername)
         {
-            return await _dataContext.User.FirstOrDefaultAsync(user => user.Username == emailOrUsername || user.Email == emailOrUsername);
+            return (await _dataContext.User.FirstOrDefaultAsync(user => user.Username == emailOrUsername || user.Email == emailOrUsername))!;
         }
 
         public async Task<bool> UpdateUserInfo(int userId, UpdateUserDTO updatedUser)
