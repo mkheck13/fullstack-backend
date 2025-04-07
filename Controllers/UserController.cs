@@ -53,5 +53,13 @@ namespace fullstack_backend.Controllers
 
             return BadRequest(new {Success = false, Message = "User not found or update failed"});
         }
+
+        [HttpGet("HelloName/{name}")]
+
+        public string HelloName(string name)
+        {
+            return $"Hello {name}";
+
+        }
     }
 }
