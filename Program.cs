@@ -16,13 +16,13 @@ builder.Services.AddScoped<UserServices>();
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddCors(options => {
-    options.AddPolicy("AllowAll", policy => {
-        policy.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin();
-    });
-});
+// builder.Services.AddCors(options => {
+//     options.AddPolicy("AllowAll", policy => {
+//         policy.AllowAnyHeader()
+//         .AllowAnyMethod()
+//         .AllowAnyOrigin();
+//     });
+// });
 
 var secretKey = builder.Configuration["JWT:key"];
 var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
