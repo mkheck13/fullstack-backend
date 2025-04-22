@@ -8,7 +8,7 @@ namespace fullstack_backend.Models.DTOS
         public string? DateOfBirth { get; set;}
         public string? PhoneNumber { get; set;}
 
-        public bool IsTrainer { get; set;}
-        public bool IsSpotter { get; set;}
+        public bool IsTrainer { get; set;} 
+        public bool IsSpotter { get; set;} 
     }
 }
