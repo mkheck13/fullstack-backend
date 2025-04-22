@@ -25,6 +25,12 @@ namespace fullstack_backend.Services
         {
             if (await DoesUserExist(newUser.Username!, newUser.Email!)) return false;
 
+            if (newUser.IsTrainer == newUser.IsSpotter)
+            {
+                throw new ArgumentException("User must be either a spotter or a trainer, not both or neither.");
+            }
+
+
             UserModel userToAdd = new();
 
             PasswordDTO encryptedPassword = HashPassword(newUser.Password!);
@@ -34,6 +40,10 @@ namespace fullstack_backend.Services
             userToAdd.Username = newUser.Username;
             userToAdd.Email = newUser.Email;
             userToAdd.DateOfBirth = newUser.DateOfBirth;
+
+            userToAdd.IsTrainer = newUser.IsTrainer;
+            userToAdd.IsSpotter = newUser.IsSpotter;
+
 
             await _dataContext.User.AddAsync(userToAdd);
             return await _dataContext.SaveChangesAsync() != 0;
@@ -158,8 +168,24 @@ namespace fullstack_backend.Services
             if (!string.IsNullOrWhiteSpace(updatedUser.UserPrimarySport)) user.UserPrimarySport = updatedUser.UserPrimarySport;
             if (!string.IsNullOrWhiteSpace(updatedUser.UserSecondarySport)) user.UserSecondarySport = updatedUser.UserSecondarySport;
 
+            if (updatedUser.IsTrainer.HasValue) user.IsTrainer = updatedUser.IsTrainer.Value;
+            if (updatedUser.IsSpotter.HasValue) user.IsSpotter = updatedUser.IsSpotter.Value;
+
+
             _dataContext.User.Update(user);
             return await _dataContext.SaveChangesAsync() > 0;
         }
+
+
+        public async Task<List<UserModel>> GetUsersByRole(string role)
+        {
+            return role.ToLower() switch
+            {
+                "trainer" => await _dataContext.User.Where(u => u.IsTrainer).ToListAsync(),
+                "spotter" => await _dataContext.User.Where(u => u.IsSpotter).ToListAsync(),
+                _ => new List<UserModel>()
+            };
+        }
+
     }
 }
