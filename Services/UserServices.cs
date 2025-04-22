@@ -44,6 +44,8 @@ namespace fullstack_backend.Services
             userToAdd.IsTrainer = newUser.IsTrainer;
             userToAdd.IsSpotter = newUser.IsSpotter;
 
+            userToAdd.TrueName = newUser.TrueName;
+
 
             await _dataContext.User.AddAsync(userToAdd);
             return await _dataContext.SaveChangesAsync() != 0;
@@ -144,6 +146,8 @@ namespace fullstack_backend.Services
             user.IsTrainer = currentUser.IsTrainer;
             user.IsSpotter = currentUser.IsSpotter;
 
+            user.TrueName = currentUser.TrueName;
+
             return user;
         }
 
@@ -171,20 +175,31 @@ namespace fullstack_backend.Services
             if (updatedUser.IsTrainer.HasValue) user.IsTrainer = updatedUser.IsTrainer.Value;
             if (updatedUser.IsSpotter.HasValue) user.IsSpotter = updatedUser.IsSpotter.Value;
 
+            if (!string.IsNullOrWhiteSpace(updatedUser.TrueName)) user.TrueName = updatedUser.TrueName;
+
 
             _dataContext.User.Update(user);
             return await _dataContext.SaveChangesAsync() > 0;
         }
 
-
-        public async Task<List<UserModel>> GetUsersByRole(string role)
+        public async Task<List<UserModel>> FindSpotters(int currentUserId, bool isSpotter)
         {
-            return role.ToLower() switch
-            {
-                "trainer" => await _dataContext.User.Where(u => u.IsTrainer).ToListAsync(),
-                "spotter" => await _dataContext.User.Where(u => u.IsSpotter).ToListAsync(),
-                _ => new List<UserModel>()
-            };
+            if (!isSpotter) return new List<UserModel>();
+
+            var spotters = await _dataContext.User
+                                             .Where(u => u.IsSpotter == true && u.Id != currentUserId)
+                                             .ToListAsync();
+            return spotters;
+        }
+
+        public async Task<List<UserModel>> FindTrainers(int currentUserId, bool isTrainer)
+        {
+            if (!isTrainer) return new List<UserModel>();
+
+            var trainers = await _dataContext.User
+                                             .Where(u => u.IsTrainer == true && u.Id != currentUserId)
+                                             .ToListAsync();
+            return trainers;
         }
 
     }
