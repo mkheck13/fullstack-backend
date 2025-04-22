@@ -54,11 +54,30 @@ namespace fullstack_backend.Controllers
             return BadRequest(new { Success = false, Message = "User not found or update failed" });
         }
 
-        [HttpGet("role/{role}")]
-        public async Task<IActionResult> GetUsersByRole(string role)
+        [HttpGet("find-spotters")]
+        public async Task<IActionResult> FindSpotter([FromQuery] int currentUserId, [FromQuery] bool isSpotter)
         {
-            var users = await _userServices.GetUsersByRole(role);
-            return Ok(users);
+            var spotters = await _userServices.FindSpotters(currentUserId, isSpotter);
+
+            if (spotters == null || spotters.Count == 0)
+            {
+                return NotFound("No spotters found.");
+            }
+
+            return Ok(spotters);
+        }
+
+        [HttpGet("find-trainers")]
+        public async Task<IActionResult> FindTrainers([FromQuery] int currentUserId, [FromQuery] bool isTrainer)
+        {
+            var trainers = await _userServices.FindTrainers(currentUserId, isTrainer);
+
+            if (trainers == null || trainers.Count == 0)
+            {
+                return NotFound("No trainers found.");
+            }
+
+            return Ok(trainers);
         }
 
 
