@@ -11,11 +11,11 @@ namespace fullstack_backend.Models.DTOS
         // new updates
         public string? UserBio { get; set; }
         public string? UserLocation { get; set; }
-        public bool UserLocationPublic { get; set; }
+        public bool? UserLocationPublic { get; set; }
         public string? UserPrimarySport { get; set; }
         public string? UserSecondarySport { get; set; }
 
-        public bool IsTrainer { get; set;}
-        public bool IsSpotter { get; set;}
+        public bool? IsTrainer { get; set;}
+        public bool? IsSpotter { get; set;} 
     }
 }
