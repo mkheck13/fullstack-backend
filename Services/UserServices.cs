@@ -63,32 +63,21 @@ namespace fullstack_backend.Services
             return await _dataContext.User.FirstOrDefaultAsync(user => user.Username == username || user.Email == email) != null;
         }
 
-        // public async Task<string> Login(UserLoginDTO user)
-        // {
-        //     UserModel currentUser = await GetUserByUserNameOrEmail(user.EmailOrUsername!, user.EmailOrUsername!);
-
-        //     if (currentUser == null) return null;
-
-        //     if (!VerifyPassword(user.Password!, currentUser.Salt!, currentUser.Hash!)) return null;
-
-        //     return GenerateJWToken(new List<Claim>());
-        // }
-
         public async Task<string?> Login(UserLoginDTO user)
-{
-    if (string.IsNullOrWhiteSpace(user.EmailOrUsername) || string.IsNullOrWhiteSpace(user.Password))
-    {
-        return null;
-    }
+        {
+            if (string.IsNullOrWhiteSpace(user.EmailOrUsername) || string.IsNullOrWhiteSpace(user.Password))
+            {
+                return null;
+            }
 
-    var currentUser = await GetUserByUserNameOrEmail(user.EmailOrUsername, user.EmailOrUsername);
+            var currentUser = await GetUserByUserNameOrEmail(user.EmailOrUsername, user.EmailOrUsername);
 
-    if (currentUser == null) return null;
+            if (currentUser == null) return null;
 
-    if (!VerifyPassword(user.Password, currentUser.Salt!, currentUser.Hash!)) return null;
+            if (!VerifyPassword(user.Password, currentUser.Salt!, currentUser.Hash!)) return null;
 
-    return GenerateJWToken(new List<Claim>());
-}
+            return GenerateJWToken(new List<Claim>());
+        }
 
 
         private string GenerateJWToken(List<Claim> claims)
@@ -137,6 +126,14 @@ namespace fullstack_backend.Services
             user.PhoneNumber = currentUser.PhoneNumber;
             user.ProfilePicture = currentUser.ProfilePicture;
 
+            user.UserBio = currentUser.UserBio;
+            user.UserLocation = currentUser.UserLocation;
+            user.UserLocationPublic = currentUser.UserLocationPublic;
+            user.UserPrimarySport = currentUser.UserPrimarySport;
+            user.UserSecondarySport = currentUser.UserSecondarySport;
+            user.IsTrainer = currentUser.IsTrainer;
+            user.IsSpotter = currentUser.IsSpotter;
+
             return user;
         }
 
@@ -150,14 +147,19 @@ namespace fullstack_backend.Services
             var user = await _dataContext.User.FindAsync(userId);
             if (user == null) return false;
 
-                if (!string.IsNullOrWhiteSpace(updatedUser.Username)) user.Username = updatedUser.Username;
-                if (!string.IsNullOrWhiteSpace(updatedUser.Email)) user.Email = updatedUser.Email;
-                if (!string.IsNullOrWhiteSpace(updatedUser.DateOfBirth)) user.DateOfBirth = updatedUser.DateOfBirth;
-                if (!string.IsNullOrWhiteSpace(updatedUser.PhoneNumber)) user.PhoneNumber = updatedUser.PhoneNumber;
-                if (!string.IsNullOrWhiteSpace(updatedUser.ProfilePicture)) user.ProfilePicture = updatedUser.ProfilePicture;
+            if (!string.IsNullOrWhiteSpace(updatedUser.Username)) user.Username = updatedUser.Username;
+            if (!string.IsNullOrWhiteSpace(updatedUser.Email)) user.Email = updatedUser.Email;
+            if (!string.IsNullOrWhiteSpace(updatedUser.DateOfBirth)) user.DateOfBirth = updatedUser.DateOfBirth;
+            if (!string.IsNullOrWhiteSpace(updatedUser.PhoneNumber)) user.PhoneNumber = updatedUser.PhoneNumber;
+            if (!string.IsNullOrWhiteSpace(updatedUser.ProfilePicture)) user.ProfilePicture = updatedUser.ProfilePicture;
 
-                _dataContext.User.Update(user);
-                return await _dataContext.SaveChangesAsync() > 0;
+            if (!string.IsNullOrWhiteSpace(updatedUser.UserBio)) user.UserBio = updatedUser.UserBio;
+            if (!string.IsNullOrWhiteSpace(updatedUser.UserLocation)) user.UserLocation = updatedUser.UserLocation;
+            if (!string.IsNullOrWhiteSpace(updatedUser.UserPrimarySport)) user.UserPrimarySport = updatedUser.UserPrimarySport;
+            if (!string.IsNullOrWhiteSpace(updatedUser.UserSecondarySport)) user.UserSecondarySport = updatedUser.UserSecondarySport;
+
+            _dataContext.User.Update(user);
+            return await _dataContext.SaveChangesAsync() > 0;
         }
     }
 }

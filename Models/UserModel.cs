@@ -17,5 +17,7 @@ namespace fullstack_backend.Models
         public bool UserLocationPublic { get; set;}
         public string? UserPrimarySport { get; set;}
         public string? UserSecondarySport { get; set;}
+        public bool IsTrainer { get; set;}
+        public bool IsSpotter { get; set;}
     }
 }
