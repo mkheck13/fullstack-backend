@@ -2,16 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using fullstack_backend.Models;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace fullstack_backend.Models
 {
-    public class MessageModel
+    public class ConversationModel
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+
+            [Key]
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public string User1Id { get; set; }
+    public string User2Id { get; set; }
+
+    public List<MessageModel> Messages { get; set; } = new();
+
+
+
+        // public Guid Id { get; set; } = Guid.NewGuid();
 
         // Assuming private 1-on-1 chat. We don't want to tackle group chats as of yet
-        public string User1Id { get; set; }
-        public string User2Id { get; set; }
+        // public string User1Id { get; set; }
+        // public string User2Id { get; set; }
 
         /*
         Note:
@@ -19,6 +32,8 @@ namespace fullstack_backend.Models
         2. EF Core recognizes ICollection<T> as a navigable relationship, so it knows how to map this to a foreign key table (Message).
         3. This is known as a one-to-many relationship, so there is "one" converseration, but "many" messages in the conversation
         */
-        public ICollection<Message> Messages { get; set; } = new List<Message>();
+        // public ICollection<Message> Messages { get; set; } = new List<Message>();
+        // public List<MessageModel> Messages { get; set; }
+
     }
 }

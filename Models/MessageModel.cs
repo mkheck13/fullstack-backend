@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,12 +8,24 @@ namespace fullstack_backend.Models
 {
     public class MessageModel
     {
-        public required string Sender { get; set; }
-        public string receiver { get; set; }
+
+            [Key]
+    public Guid Id { get; set; } = Guid.NewGuid();
+
+    public string SenderId { get; set; }
+    public string Content { get; set; }
+    public DateTime Timestamp { get; set; } = DateTime.UtcNow;
+
+    public Guid ConversationId { get; set; }
+    public ConversationModel Conversation { get; set; }
+
+
+        // public required string Sender { get; set; }
+        // public string receiver { get; set; }
 
         //the actual message and time it was sent
-        public required string Content { get; set; }
-        public DateTime Timestamp { get; set; }
+        // public required string Content { get; set; }
+        // public DateTime Timestamp { get; set; }
 
         //The following is in prep for when we have private messages between users
 
