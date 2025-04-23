@@ -12,8 +12,8 @@ using fullstack_backend.Context;
 namespace fullstack_backend.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250423161549_AddFriendshipModel")]
-    partial class AddFriendshipModel
+    [Migration("20250423221054_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,25 @@ namespace fullstack_backend.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("fullstack_backend.Models.ConversationModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("User1Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User2Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversations");
+                });
 
             modelBuilder.Entity("fullstack_backend.Models.FriendshipModel", b =>
                 {
@@ -59,6 +78,42 @@ namespace fullstack_backend.Migrations
                     b.HasIndex("UserModelId1");
 
                     b.ToTable("Friendships");
+                });
+
+            modelBuilder.Entity("fullstack_backend.Models.MessageModel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("ConversationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid?>("ConversationId1")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ReceiverId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Timestamp")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.HasIndex("ConversationId1");
+
+                    b.ToTable("Messages");
                 });
 
             modelBuilder.Entity("fullstack_backend.Models.UserModel", b =>
@@ -144,6 +199,26 @@ namespace fullstack_backend.Migrations
                     b.Navigation("Friend");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("fullstack_backend.Models.MessageModel", b =>
+                {
+                    b.HasOne("fullstack_backend.Models.ConversationModel", null)
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("fullstack_backend.Models.ConversationModel", "Conversation")
+                        .WithMany()
+                        .HasForeignKey("ConversationId1");
+
+                    b.Navigation("Conversation");
+                });
+
+            modelBuilder.Entity("fullstack_backend.Models.ConversationModel", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("fullstack_backend.Models.UserModel", b =>
