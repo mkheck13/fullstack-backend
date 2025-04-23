@@ -73,4 +73,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.MapHub<MessagingHub>("/hub");
+
 app.Run();
