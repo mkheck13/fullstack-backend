@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("fullstack-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6569ba023aa0e4155d7370a073053313e6409e9e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d34b6d026dd20e52a68471250a1c02b6816d3b1d")]
 [assembly: System.Reflection.AssemblyProductAttribute("fullstack-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("fullstack-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
