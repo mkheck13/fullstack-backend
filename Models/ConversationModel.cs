@@ -1,24 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using fullstack_backend.Models;
-using System.ComponentModel.DataAnnotations;
-
 
 namespace fullstack_backend.Models
 {
     public class ConversationModel
     {
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+        public string User1Id { get; set; }
+        public string User2Id { get; set; }
 
-            [Key]
-    public Guid Id { get; set; } = Guid.NewGuid();
-    public string User1Id { get; set; }
-    public string User2Id { get; set; }
-
-    public List<MessageModel> Messages { get; set; } = new();
-
-
+        public List<MessageModel> Messages { get; set; } = new();
 
         // public Guid Id { get; set; } = Guid.NewGuid();
 
@@ -34,6 +30,5 @@ namespace fullstack_backend.Models
         */
         // public ICollection<Message> Messages { get; set; } = new List<Message>();
         // public List<MessageModel> Messages { get; set; }
-
     }
 }

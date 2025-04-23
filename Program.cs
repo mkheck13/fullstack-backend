@@ -1,8 +1,6 @@
 using System.Text;
-
 using fullstack_backend.Context;
 using fullstack_backend.Hubs;
-
 // using fullstack_backend.Hubs;
 using fullstack_backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -26,39 +24,42 @@ builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(conne
 var secretKey = builder.Configuration["JWT:key"];
 var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
 
-builder.Services.AddAuthentication(options => {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer( options => {
-    options.TokenValidationParameters = new TokenValidationParameters
+builder
+    .Services.AddAuthentication(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-        
-        ValidIssuer = "https://fullstackwebapp-bxcja2evd2hef3b9.westus-01.azurewebsites.net/",
-        ValidAudience = "https://fullstackwebapp-bxcja2evd2hef3b9.westus-01.azurewebsites.net/",
-        IssuerSigningKey = signingCredentials
-    };
-});
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = "https://fullstackwebapp-bxcja2evd2hef3b9.westus-01.azurewebsites.net/",
+            ValidAudience = "https://fullstackwebapp-bxcja2evd2hef3b9.westus-01.azurewebsites.net/",
+            IssuerSigningKey = signingCredentials,
+        };
+    });
 
 //Custom added scopes
 builder.Services.AddScoped<UserServices>();
 
-builder.Services.AddCors(options =>{
-    options.AddPolicy("AllowAll",
-    policy=>{
-        policy.AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowAnyOrigin();
-    }
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "AllowAll",
+        policy =>
+        {
+            policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        }
     );
 });
 
 var app = builder.Build();
-
 
 if (app.Environment.IsDevelopment())
 {
