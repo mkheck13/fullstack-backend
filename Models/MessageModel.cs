@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace fullstack_backend.Models
 {
@@ -18,7 +19,8 @@ namespace fullstack_backend.Models
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
     public Guid ConversationId { get; set; }
-    public ConversationModel Conversation { get; set; }  // Navigation property to Conversation
+
+    public ConversationModel? Conversation { get; set; }  // Navigation property to Conversation
 
 
         // public required string Sender { get; set; }
