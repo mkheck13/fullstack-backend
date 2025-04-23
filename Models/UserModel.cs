@@ -19,8 +19,8 @@ namespace fullstack_backend.Models
         public bool IsSpotter { get; set; }
         public string? TrueName { get; set; }
 
-public ICollection<FriendshipModel> FriendsRequested { get; set; } = new List<FriendshipModel>();
-public ICollection<FriendshipModel> FriendsReceived { get; set; } = new List<FriendshipModel>();
+        public ICollection<FriendshipModel> FriendsRequested { get; set; } = new List<FriendshipModel>();
+        public ICollection<FriendshipModel> FriendsReceived { get; set; } = new List<FriendshipModel>();
 
     }
 }

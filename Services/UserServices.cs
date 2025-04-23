@@ -40,6 +40,15 @@ namespace fullstack_backend.Services
             userToAdd.Username = newUser.Username;
             userToAdd.Email = newUser.Email;
             userToAdd.DateOfBirth = newUser.DateOfBirth;
+            userToAdd.PhoneNumber = newUser.PhoneNumber;
+            userToAdd.ProfilePicture = newUser.ProfilePicture;
+            userToAdd.UserBio = newUser.UserBio;
+            userToAdd.UserLocation = newUser.UserLocation;
+
+            userToAdd.UserLocationPublic = newUser.UserLocationPublic ?? false;
+            
+            userToAdd.UserPrimarySport = newUser.UserPrimarySport;
+            userToAdd.UserSecondarySport = newUser.UserSecondarySport;
 
             userToAdd.IsTrainer = newUser.IsTrainer;
             userToAdd.IsSpotter = newUser.IsSpotter;
@@ -174,6 +183,8 @@ namespace fullstack_backend.Services
 
             if (updatedUser.IsTrainer.HasValue) user.IsTrainer = updatedUser.IsTrainer.Value;
             if (updatedUser.IsSpotter.HasValue) user.IsSpotter = updatedUser.IsSpotter.Value;
+
+            if (updatedUser.UserLocationPublic.HasValue) user.UserLocationPublic = updatedUser.UserLocationPublic.Value;
 
             if (!string.IsNullOrWhiteSpace(updatedUser.TrueName)) user.TrueName = updatedUser.TrueName;
 
