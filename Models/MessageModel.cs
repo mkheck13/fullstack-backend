@@ -9,15 +9,16 @@ namespace fullstack_backend.Models
     public class MessageModel
     {
 
-            [Key]
+ [Key]
     public Guid Id { get; set; } = Guid.NewGuid();
 
-    public string SenderId { get; set; }
-    public string Content { get; set; }
+    public string SenderId { get; set; }  // The user sending the message
+    public string ReceiverId { get; set; } // The user receiving the message
+    public string Content { get; set; }    // The content of the message
     public DateTime Timestamp { get; set; } = DateTime.UtcNow;
 
     public Guid ConversationId { get; set; }
-    public ConversationModel Conversation { get; set; }
+    public ConversationModel Conversation { get; set; }  // Navigation property to Conversation
 
 
         // public required string Sender { get; set; }
