@@ -45,7 +45,7 @@ namespace fullstack_backend.Services
 
             if (postToUpdate == null) return false;
 
-            postToUpdate.UserId = post.UserId;
+
             postToUpdate.Username = post.Username;
             postToUpdate.TrueName = post.TrueName;
             postToUpdate.ProfilePicture = post.ProfilePicture;

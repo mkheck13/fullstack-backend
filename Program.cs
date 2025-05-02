@@ -16,6 +16,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserServices>();
 builder.Services.AddScoped<FriendshipServices>();
+builder.Services.AddScoped<PostServices>();
 
 //builder for chat (For SignalR Services)
 builder.Services.AddSignalR();
