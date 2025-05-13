@@ -1,6 +1,9 @@
-
 using System.Text;
+
 using fullstack_backend.Context;
+using fullstack_backend.Hubs;
+
+// using fullstack_backend.Hubs;
 using fullstack_backend.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -12,17 +15,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserServices>();
+builder.Services.AddScoped<FriendshipServices>();
+builder.Services.AddScoped<PostServices>();
+
+//builder for chat (For SignalR Services)
+builder.Services.AddSignalR();
 
 var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(connectionString));
-
-// builder.Services.AddCors(options => {
-//     options.AddPolicy("AllowAll", policy => {
-//         policy.AllowAnyHeader()
-//         .AllowAnyMethod()
-//         .AllowAnyOrigin();
-//     });
-// });
 
 var secretKey = builder.Configuration["JWT:key"];
 var signingCredentials = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey!));
@@ -76,5 +76,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapHub<MessagingHub>("/hub");
 
 app.Run();

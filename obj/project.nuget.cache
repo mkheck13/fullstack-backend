@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "bLmCcpUlR9E=",
+  "dgSpecHash": "oGtKWXUKEU0=",
   "success": true,
   "projectFilePath": "C:\\Users\\brock\\OneDrive\\Documents\\CodeStack\\Level 3\\spotmebackend\\fullstack-backend\\fullstack-backend.csproj",
   "expectedPackageFiles": [
@@ -82,5 +82,12 @@
     "C:\\Users\\brock\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\brock\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\brock\\OneDrive\\Documents\\CodeStack\\Level 3\\spotmebackend\\fullstack-backend\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
