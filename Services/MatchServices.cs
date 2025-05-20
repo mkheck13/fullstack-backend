@@ -30,7 +30,7 @@ namespace fullstack_backend.Services
 
         public async Task<List<MatchModel>> GetMatchesByDate(string date)
         {
-            return await _dataContext.Matches.Where(match => match.DateCreated == date).ToListAsync();
+            return await _dataContext.Matches.Where(match => match.DaysAvailable == date).ToListAsync();
         }
 
         public async Task<bool> CreateMatch(MatchModel match)
@@ -49,7 +49,7 @@ namespace fullstack_backend.Services
             matchToUpdate.MyName = match.MyName;
             matchToUpdate.UserContent = match.UserContent;
             matchToUpdate.UserSport = match.UserSport;
-            matchToUpdate.DateCreated = match.DateCreated;
+            matchToUpdate.DaysAvailable = match.DaysAvailable;
             matchToUpdate.StartTime = match.StartTime;
             matchToUpdate.EndTime = match.EndTime;
 
@@ -58,8 +58,3 @@ namespace fullstack_backend.Services
         }
     }
 }
-
-
-
-// UpdateMatch
-// DeleteMatch
