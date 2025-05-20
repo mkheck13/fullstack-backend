@@ -51,6 +51,8 @@ namespace fullstack_backend.Services
             postToUpdate.ProfilePicture = post.ProfilePicture;
             postToUpdate.DateCreated = post.DateCreated;
             postToUpdate.Description = post.Description;
+            postToUpdate.Stat = post.Stat;
+            postToUpdate.Sport = post.Sport;
             postToUpdate.IsPublished = post.IsPublished;
             postToUpdate.IsDeleted = post.IsDeleted;
 
