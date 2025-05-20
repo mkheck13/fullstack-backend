@@ -85,7 +85,7 @@ namespace fullstack_backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("DateCreated")
+                    b.Property<string>("DaysAvailable")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("EndTime")
