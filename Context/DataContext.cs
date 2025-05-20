@@ -12,6 +12,7 @@ namespace fullstack_backend.Context
         public DbSet<PostModel> Posts { get; set;}
         public DbSet<MessageModel> Messages { get; set; }
         public DbSet<ConversationModel> Conversations { get; set; }
+        public DbSet<MatchModel> Matches { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
