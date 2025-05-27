@@ -28,16 +28,28 @@ namespace fullstack_backend.Controllers
                 return BadRequest(new ResponseFriendshipDTO { Message = "Error adding friend.", Success = false });
         }
 
+        // [HttpDelete("remove")]
+        // public async Task<IActionResult> RemoveFriend([FromBody] DeleteFriendshipDTO removeFriendDTO)
+        // {
+        //     var result = await _friendshipService.RemoveFriend(removeFriendDTO.UserId, removeFriendDTO.FriendId);
+
+        //     if (result)
+        //         return Ok(new ResponseFriendshipDTO { Message = "Friend removed successfully.", Success = true });
+        //     else
+        //         return BadRequest(new ResponseFriendshipDTO { Message = "Error removing friend.", Success = false });
+        // }
+
         [HttpDelete("remove")]
-        public async Task<IActionResult> RemoveFriend([FromBody] DeleteFriendshipDTO removeFriendDTO)
+        public async Task<IActionResult> RemoveFriend([FromQuery] int userId, [FromQuery] int friendId)
         {
-            var result = await _friendshipService.RemoveFriend(removeFriendDTO.UserId, removeFriendDTO.FriendId);
+            var result = await _friendshipService.RemoveFriend(userId, friendId);
 
             if (result)
                 return Ok(new ResponseFriendshipDTO { Message = "Friend removed successfully.", Success = true });
             else
                 return BadRequest(new ResponseFriendshipDTO { Message = "Error removing friend.", Success = false });
         }
+
 
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetFriends(int userId)
