@@ -80,6 +80,22 @@ namespace fullstack_backend.Controllers
             return Ok(trainers);
         }
 
+        [HttpGet("GetUserProfileImage/{userId}")]
+        public async Task<IActionResult> GetUserProfileImage(string userId)
+        {
+            var user = await _userServices.GetUserInfoByEmailOrUsername(userId);
+
+            if (user != null && !string.IsNullOrEmpty(user.ProfilePicture))
+            {
+                return Ok(new { ProfileImageUrl = user.ProfilePicture });
+            }
+
+            return Ok(new { ProfileImageUrl = "" });
+        }
+
+
+
+
 
         // Test endpoint
 
