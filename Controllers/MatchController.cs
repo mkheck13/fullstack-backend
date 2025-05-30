@@ -24,7 +24,7 @@ namespace fullstack_backend.Controllers
             if (matches != null && matches.Count > 0)
                 return Ok(matches);
 
-            return BadRequest(new { Message = "No matches found" });
+            return BadRequest(new {  });
         }
 
         // Get matches by userId
@@ -36,7 +36,7 @@ namespace fullstack_backend.Controllers
             if (matches != null)
                 return Ok(matches);
 
-            return BadRequest(new { Message = "No matches found" });
+            return BadRequest(new {  });
         }
 
         // Get matches by Id
@@ -48,7 +48,7 @@ namespace fullstack_backend.Controllers
             if (matches != null)
                 return Ok(matches);
 
-            return BadRequest(new { Message = "No matches found" });
+            return BadRequest(new {  });
         }
 
         // Get matches by date
@@ -60,7 +60,7 @@ namespace fullstack_backend.Controllers
             if (matches != null && matches.Count > 0)
                 return Ok(matches);
 
-            return BadRequest(new { Message = "No matches found" });
+            return BadRequest(new {  });
         }
 
         // Create Match
@@ -69,8 +69,8 @@ namespace fullstack_backend.Controllers
         {
             var success = await _matchServices.CreateMatch(match);
 
-            if (success) return Ok(new { success = true, message = "Match Created" });
-            return BadRequest(new { message = "Match not created" });
+            if (success) return Ok(new { success = true,  });
+            return BadRequest(new {  });
         }
 
         // Update Match
@@ -79,8 +79,8 @@ namespace fullstack_backend.Controllers
         {
             var success = await _matchServices.UpdateMatch(match);
 
-            if (success) return Ok(new { success = true, message = "Match Updated" });
-            return BadRequest(new { message = "Match not updated" });
+            if (success) return Ok(new { success = true  });
+            return BadRequest(new {  });
         }
 
         // Delete Match
@@ -89,8 +89,8 @@ namespace fullstack_backend.Controllers
         {
             var success = await _matchServices.UpdateMatch(match);
 
-            if (success) return Ok(new { success = true, message = "Match Deleted" });
-            return BadRequest(new { message = "Match not deleted" });
+            if (success) return Ok(new { success = true });
+            return BadRequest(new {  });
         }
 
 

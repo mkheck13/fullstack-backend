@@ -22,7 +22,7 @@ namespace fullstack_backend.Controllers
 
             if (success) return Ok(new { Success = true });
 
-            return BadRequest(new { Success = false, Message = "User already Exists" });
+            return BadRequest(new { Success = false });
         }
 
         [HttpPost("Login")]
@@ -32,7 +32,7 @@ namespace fullstack_backend.Controllers
 
             if (success != null) return Ok(new { Token = success });
 
-            return Unauthorized(new { Message = "Username or Password is incorrect" });
+            return Unauthorized(new { });
         }
 
         [HttpGet("GetUserInfoByEmailOrUsername/{emailOrUsername}")]
@@ -42,16 +42,16 @@ namespace fullstack_backend.Controllers
 
             if (user != null) return Ok(user);
 
-            return BadRequest(new { Message = " User not found" });
+            return BadRequest(new {  });
         }
 
         [HttpPut("UpdateUserInfo/{userId}")]
         public async Task<IActionResult> UpdateUserInfo(int userId, [FromBody] UpdateUserDTO updatedUser)
         {
             bool success = await _userServices.UpdateUserInfo(userId, updatedUser);
-            if (success) return Ok(new { Success = true, Message = "User updated successfully" });
+            if (success) return Ok(new { Success = true });
 
-            return BadRequest(new { Success = false, Message = "User not found or update failed" });
+            return BadRequest(new { Success = false});
         }
 
         [HttpGet("find-spotters")]
