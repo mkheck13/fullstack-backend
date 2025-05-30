@@ -23,7 +23,7 @@ namespace fullstack_backend.Controllers
 
             if (posts != null && posts.Count > 0)
                 return Ok(posts);
-            return BadRequest(new { Message = "No posts found" });
+            return BadRequest(new {  });
         }
 
         [HttpGet("GetPostsByUserId/{userId}")]
@@ -34,7 +34,7 @@ namespace fullstack_backend.Controllers
             if (posts != null && posts.Count > 0)
                 return Ok(posts);
 
-            return BadRequest(new { Message = "No posts found for this user" });
+            return BadRequest(new {  });
         }
 
         [HttpGet("GetPostById/{id}")]
@@ -45,7 +45,7 @@ namespace fullstack_backend.Controllers
             if (posts != null)
                 return Ok(posts);
 
-            return BadRequest(new { Message = "No posts found" });
+            return BadRequest(new {  });
         }
 
         [HttpGet("GetPostsByDate/{date}")]
@@ -56,7 +56,7 @@ namespace fullstack_backend.Controllers
             if (posts != null)
                 return Ok(posts);
 
-            return BadRequest(new { Message = "No posts found" });
+            return BadRequest(new {  });
         }
 
         [HttpPost("CreatePost")]
@@ -64,9 +64,9 @@ namespace fullstack_backend.Controllers
         {
             var success = await _postServices.CreatePost(post);
 
-            if (success) return Ok(new { Success = true, Message = "Post created" });
+            if (success) return Ok(new { Success = true });
 
-            return BadRequest(new { Message = "Post not created" });
+            return BadRequest(new {  });
         }
 
         [HttpPut("UpdatePost")]
@@ -74,9 +74,9 @@ namespace fullstack_backend.Controllers
         {
             var success = await _postServices.UpdatePost(post);
 
-            if (success) return Ok(new { Success = true, Message = "Post updated" });
+            if (success) return Ok(new { Success = true });
 
-            return BadRequest(new { Message = "Post not updated" });
+            return BadRequest(new {  });
         }
 
         [HttpDelete("DeletePost")]
@@ -84,9 +84,9 @@ namespace fullstack_backend.Controllers
         {
             var success = await _postServices.UpdatePost(post);
 
-            if (success) return Ok(new { Success = true, Message = "Post deleted" });
+            if (success) return Ok(new { Success = true });
 
-            return BadRequest(new { Message = "Failed to delete post" });
+            return BadRequest(new {  });
         }
 
 

@@ -23,9 +23,9 @@ namespace fullstack_backend.Controllers
             var result = await _friendshipService.AddFriend(addFriendDTO.UserId, addFriendDTO.FriendId);
 
             if (result)
-                return Ok(new ResponseFriendshipDTO { Message = "Friend added successfully.", Success = true });
+                return Ok(new ResponseFriendshipDTO {  Success = true });
             else
-                return BadRequest(new ResponseFriendshipDTO { Message = "Error adding friend.", Success = false });
+                return BadRequest(new ResponseFriendshipDTO {  Success = false });
         }
 
         // [HttpDelete("remove")]
@@ -45,9 +45,9 @@ namespace fullstack_backend.Controllers
             var result = await _friendshipService.RemoveFriend(userId, friendId);
 
             if (result)
-                return Ok(new ResponseFriendshipDTO { Message = "Friend removed successfully.", Success = true });
+                return Ok(new ResponseFriendshipDTO {  Success = true });
             else
-                return BadRequest(new ResponseFriendshipDTO { Message = "Error removing friend.", Success = false });
+                return BadRequest(new ResponseFriendshipDTO {  Success = false });
         }
 
 
@@ -59,7 +59,7 @@ namespace fullstack_backend.Controllers
             if (friends != null && friends.Count > 0)
                 return Ok(friends);
             else
-                return NotFound(new ResponseFriendshipDTO { Message = "No friends found.", Success = false });
+                return NotFound(new ResponseFriendshipDTO {  Success = false });
         }
 
         [HttpGet("are-friends/{userId}/{friendId}")]
@@ -67,7 +67,7 @@ namespace fullstack_backend.Controllers
         {
             var result = await _friendshipService.AreFriends(userId, friendId);
 
-            return Ok(new ResponseFriendshipDTO { Message = result ? "They are friends." : "They are not friends.", Success = result });
+            return Ok(new ResponseFriendshipDTO {  Success = result });
         }
     }
 }
